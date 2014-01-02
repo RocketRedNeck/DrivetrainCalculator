@@ -1,5 +1,6 @@
 
 import java.io.Serializable;
+import org.jfree.data.xy.XYSeries;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

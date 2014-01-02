@@ -7,18 +7,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 
 /**
- *
+ * GUI Frontend for calculator.
  * @author brennon.brimhall
  */
 public class MainWindow extends javax.swing.JFrame {
@@ -390,8 +382,7 @@ public class MainWindow extends javax.swing.JFrame {
         parseScenario();
         fileChooser.showSaveDialog(null);
         new Calculator(currentScenario, fileChooser.getSelectedFile()).calculate();
-        
-        JOptionPane.showMessageDialog(null, "Successfully wrote file.");
+        //JOptionPane.showMessageDialog(null, "Successfully wrote file.");
     }//GEN-LAST:event_generateButtonActionPerformed
 
     private void dtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dtFieldActionPerformed

@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -16,10 +14,13 @@ import javax.swing.JOptionPane;
 public class Calculator {
     //Build:
     public final String build = "0.1.1";
-
+    
     //File to print to:
     JFileChooser fileChooser;
     BufferedWriter writer;
+    
+    //Chart data
+    ChartData data;
     
     // The following constants define the drivetrain being modeled:
     double Kro;     // rolling resistance tuning parameter, lbf
@@ -87,12 +88,8 @@ public class Calculator {
             double dt,
             double tstop,
             File file){
-        
-        //Getting file to print to
-        //this.fileChooser = new JFileChooser();
-        //this.fileChooser.showSaveDialog(null);
+       
         try {
-            //this.writer = new BufferedWriter(new FileWriter(fileChooser.getSelectedFile()));
             this.writer = new BufferedWriter(new FileWriter(file));
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "The file could not be found.");
@@ -119,6 +116,8 @@ public class Calculator {
         this.Rone = Rone;
         this.dt = dt;
         this.tstop = tstop;
+        
+        this.data = new ChartData();
     }
     
     public Calculator(Scenario s, File file){
@@ -159,7 +158,13 @@ public class Calculator {
         a=accel(V); // compute accel at t=0
         print();    // output values at t=0
         
-        Heun();
+        final ChartData data = Heun();
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ChartWindow(data).setVisible(true);
+            }
+        });
     }
     
     private void English2SI() {
@@ -227,6 +232,14 @@ public class Calculator {
                             t,x*3.28083,V*3.28083,slipping_int,a*3.28083,
                             n*A/10, Vm)
             );
+            
+            data.xAdd(t, x*3.28083);
+            data.VAdd(t, V*3.28083);
+            data.slippingAdd(t, slipping_int);
+            data.aAdd(t, a*3.28083);
+            data.AAdd(t, n*A/10);
+            data.VmAdd(t, Vm);
+            
             writer.flush();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "An IO Exception occurred.");
@@ -244,7 +257,7 @@ public class Calculator {
         }
     }
     
-    public final void Heun(){
+    public ChartData Heun(){
         double Vtmp, atmp;          // local scratch variables
         
         for (t=dt; t<=tstop; t+=dt) {
@@ -261,5 +274,7 @@ public class Calculator {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "An IO Exception occurred.");
         }
-    } 
+        
+        return data;
+    }
 }
