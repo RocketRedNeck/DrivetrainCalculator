@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Calculator {
     //Build:
-    public final String build = "0.1.1";
+    public final String version = "0.3.2";
     
     //File to print to:
     JFileChooser fileChooser;
@@ -253,7 +253,7 @@ public class Calculator {
     public void printFirstLine(){
         try {
             writer.write(
-                "t,feet,ft/s,slip,ft/s/s,amps/10,Vm,"+build+" Kro="+Kro+" Krv="+Krv+" Kf="+Kf+" Vspec="+Vspec+" Tspec="+Tspec+" Wspec="+Wspec+" Ispec="+Ispec+" Rcom="+Rcom+" Vbat="+Vbat+" Rone="+Rone+" n="+n+" G="+G+" r="+r+" M="+M+" uk="+uk+" us="+us+"\n"
+                "t,feet,ft/s,slip,ft/s/s,amps/10,Vm, version="+version+" Kro="+Kro+" Krv="+Krv+" Kf="+Kf+" Vspec="+Vspec+" Tspec="+Tspec+" Wspec="+Wspec+" Ispec="+Ispec+" Rcom="+Rcom+" Vbat="+Vbat+" Rone="+Rone+" n="+n+" G="+G+" r="+r+" M="+M+" uk="+uk+" us="+us+"\n"
             );
             writer.flush();
         } catch (IOException ex) {
