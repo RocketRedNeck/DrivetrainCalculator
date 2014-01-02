@@ -51,6 +51,7 @@ public class Calculator {
     
     double dt;      // integration step size, seconds
     double tstop;   // integration duration, seconds
+    double xstop;   // maximum distance calculated
     
     // derived constants:
     double  Toffset, Tslope,    // offset and slope of adjusted Torque vs Speed motor curve
@@ -87,6 +88,7 @@ public class Calculator {
             double Rone,
             double dt,
             double tstop,
+            double xstop,
             File file){
        
         try {
@@ -116,6 +118,7 @@ public class Calculator {
         this.Rone = Rone;
         this.dt = dt;
         this.tstop = tstop;
+        this.xstop = xstop;
         
         this.data = new ChartData();
     }
@@ -140,6 +143,7 @@ public class Calculator {
                 s.Rone, 
                 s.dt, 
                 s.tstop,
+                s.xstop,
                 file);
     }
     
@@ -260,7 +264,7 @@ public class Calculator {
     public ChartData Heun(){
         double Vtmp, atmp;          // local scratch variables
         
-        for (t=dt; t<=tstop; t+=dt) {
+        for (t=dt; (t<=tstop && x<=xstop); t+=dt) {
             Vtmp = V+a*dt;          // kickstart with Euler step
             atmp = accel(Vtmp);
             Vtmp = V+(a+atmp)/2*dt; // recalc Vtmp trapezoidally

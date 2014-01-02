@@ -12,8 +12,7 @@ public class ChartData {
     XYSeries slipping;
     XYSeries a;
     XYSeries A;
-    XYSeries Vm;
-    
+    XYSeries Vm; 
     
     public ChartData() {
         x = new XYSeries("Distance (ft)");

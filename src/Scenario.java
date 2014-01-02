@@ -31,6 +31,7 @@ public class Scenario implements Serializable {
     double Rone;
     double dt;
     double tstop;
+    double xstop;
     
     public Scenario(
             double Kro, 
@@ -50,7 +51,8 @@ public class Scenario implements Serializable {
             double Vbat, 
             double Rone,
             double dt,
-            double tstop){
+            double tstop,
+            double xstop){
         this.Kro = Kro;
         this.Krv = Krv;
         this.Kf = Kf;
@@ -69,5 +71,6 @@ public class Scenario implements Serializable {
         this.Rone = Rone;
         this.dt = dt;
         this.tstop = tstop;
+        this.xstop = xstop;
     }
 }
