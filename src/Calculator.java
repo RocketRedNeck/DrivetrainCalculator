@@ -279,6 +279,8 @@ public class Calculator {
             JOptionPane.showMessageDialog(null, "An IO Exception occurred.");
         }
         
+        JOptionPane.showMessageDialog(null, "Final time is "+String.format("%.2f",t)+" seconds, final distance is "+String.format("%.2f",x*3.28083)+" feet.");
+        
         return data;
     }
 }
